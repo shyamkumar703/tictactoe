@@ -10,25 +10,24 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    var gameView = SKView(frame: UIScreen.main.bounds)
+    var scene = GameScene()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+    
+    // MARK: - Setup
+    
+    func setupView() {
+        scene.scaleMode = .resizeFill
+        gameView.ignoresSiblingOrder = true
+        gameView.showsFPS = true
+        gameView.showsNodeCount = true
         
-        if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
-            
-            view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
-        }
+        view.addSubview(gameView)
+        gameView.presentScene(scene)
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
